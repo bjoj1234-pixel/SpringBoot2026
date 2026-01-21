@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>rental</title>
+</head>
+<body>
+	<form th:action="@{/book/rentalProc}" method="GET">
+		<input type="text" name="bookTitle" placeholder="bookTitle"><br>
+		<input type="text" name="author" placeholder="author"><br>
+		<input type="text" name="isbn" placeholder="isbn"><br>
+		<input type="text" name="Name" placeholder="Name"><br>
+		<input type="submit" value="SIGN-UP">
+	</form>
+
+</body>
+</html>

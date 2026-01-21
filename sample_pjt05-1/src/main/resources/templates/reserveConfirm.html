@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>reserveConfirm</title>
+</head>
+<body>
+	<h2>예매확인</h2>
+	
+	<ul>
+		<li>영화제목: <span th:text={$title}></span></li> 
+		<li>관람날짜: <span th:text={$date}></span></li> 
+		<li>관람시간: <span th:text={$time}></span></li> 
+		<li>인원: <span th:text={$person}></span></li> 
+		<li>예매자: <span th:text={$name}></span></li> 
+		<li>예매가 완료되었습니다!</li> 
+	</ul>
+
+</body>
+</html>

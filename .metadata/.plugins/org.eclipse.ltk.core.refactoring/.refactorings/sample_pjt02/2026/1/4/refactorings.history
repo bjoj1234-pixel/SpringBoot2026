@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;sample_pjt02/src/main/resources/templates/signinForm.html&apos; to &apos;signInForm.html&apos;" description="Rename resource &apos;signinForm.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/resources/templates/signinForm.html" name="signInForm.html" stamp="1768961328514" updateReferences="true"/>
+</session>

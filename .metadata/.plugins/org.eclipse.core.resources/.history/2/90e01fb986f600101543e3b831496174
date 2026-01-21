@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>SignInForm</title>
+</head>
+<body>
+	<form th:action="@{/member/signInconfirm}" method="POST">
+		<input type="text" name="id" placeholder="id"><br>
+		<input type="password" name="pw" placeholder="pw"><br>
+		<input type="submit" value="SIGN-IN">
+	</form>
+</body>
+</html>

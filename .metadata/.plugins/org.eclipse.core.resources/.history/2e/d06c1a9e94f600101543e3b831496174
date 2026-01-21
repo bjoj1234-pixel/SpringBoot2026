@@ -1,0 +1,44 @@
+package com.green;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+public class BookController {
+	@GetMapping("/book/rental")
+	public String rentalInput() {
+		System.out.println("rentalInput()");
+		return "rental";
+	}
+	
+	@GetMapping("/book/rentalProc")
+	public ModelAndView rentalInfo(
+			@RequestParam("bookTitle") String bookTitle,
+			@RequestParam("author") String author,
+			@RequestParam("isbn") String isbn,
+			@RequestParam("Name") String Name
+			) { 
+		
+			ModelAndView mv = new ModelAndView();
+			
+
+			mv.addObject("bookTitle", List.of(bookTitle, bookTitle, bookTitle, bookTitle, bookTitle));
+			mv.addObject("author", List.of(author, author, author, author, author));
+			mv.addObject("isbn", List.of(isbn, isbn, isbn, isbn, isbn));
+			mv.addObject("Name", List.of(Name, Name, Name, Name, Name));
+			
+			mv.setViewName("rentalProc");
+			
+			System.out.println("rentalInfo()");
+		
+	
+			return mv;
+	}
+	
+	
+
+}

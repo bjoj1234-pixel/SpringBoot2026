@@ -1,0 +1,17 @@
+package com.example.demo;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+//Greeting 클래스는 Controller의 역할을 하게 지정해줘
+@Controller //Controller라는 Bean객체가 생성되도록 어노테이션 처리
+public class Greeting {
+
+	// 메소드
+	@GetMapping("/") // http://localhost:8090/ => 홈페이지
+	public String greet() {
+		System.out.println("greet()");
+		return "home"; //home.html => 페이지 이름 반환
+	}
+	
+}

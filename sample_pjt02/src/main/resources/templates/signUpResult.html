@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원정보</title>
+</head>
+<body>
+	<!-- th:text는 객체의 값을 문자열로 변환해서 화면에 출력 -->
+	<!-- 숫자로 바꾸는 형식 : ${#number.formatDecimal(value,#,##0)} -->
+	<h2>회원 가입정보</h2>
+	<p>가입시간 : <span th:text="${now}"></span></p>
+	<p>아이디 : <span th:text="${new_id}"></span></p>
+	<p>비밀번호 : <span th:text="${new_pw}"></span></p>
+	<p>email : <span th:text="${new_email}"></span></p>
+</body>
+</html>
