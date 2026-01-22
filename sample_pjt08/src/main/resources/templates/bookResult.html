@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>bookResult</title>
+</head>
+<body>
+	<h2>검색한 도서 정보</h2>
+	<form th:action="@{/book/bookrent}" method="POST">
+		<ul>
+			<li>도서명: <span th:text="${s_title}"></span></li> 
+			<li>저자: <span th:text="${s_author}"></span></li>
+			<li>ISBN: <span th:text="${s_isbn}" ></span></li>
+			<!-- <li>대여자: <span th:text="n:${name}" th:text="${n}"></span></li> -->
+		</ul>
+		<input type="text" name="s_title" th:value="${s_title}">
+		<input type="text" name="s_author" th:value="${s_author}">
+		<input type="text" name="s_isbn" th:value="${s_isbn}">		
+		<input type="submit" value="예약하기">			
+	</form>
+</body>
+</html>

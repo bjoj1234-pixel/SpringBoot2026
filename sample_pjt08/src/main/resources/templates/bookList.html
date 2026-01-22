@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>bookList</title>
+</head>
+<body>
+	<h2>추가된 도서 정보</h2>
+	<ul>
+		<li>도서명: <span th:text="${title}"></span></li> 
+		<li>저자: <span th:text="${author}"></span></li>
+		<li>ISBN: <span th:text="${isbn}" ></span></li>
+		<!-- <li>대여자: <span th:text="n:${name}" th:text="${n}"></span></li> -->
+	</ul>
+	<form th:action="@{/book/booktotal}" method="GET">
+		<input type="submit" value="전체 도서정보 보기 클릭 >">			
+	</form>
+</body>
+</html>
