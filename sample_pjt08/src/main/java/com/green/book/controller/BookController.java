@@ -15,10 +15,17 @@ public class BookController {
 	@Autowired
 	BookService bookservice;
 	//도서 추가
-	@GetMapping("/book/bookadd")
+	@PostMapping("/book/bookadd")
 	public String bookAdd() {
 		System.out.println("bookAdd()");
 		return "bookAdd";
+	}
+	
+	@PostMapping("/book/bookaddcheck")
+	public String bookaddcheck(BookDTO bdto) {
+		System.out.println("bookaddcheck()");
+		
+		return "redirect:/book/bookadd";
 	}
 	
 	//도서 전체목록

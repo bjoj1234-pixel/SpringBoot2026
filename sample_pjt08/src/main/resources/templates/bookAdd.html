@@ -5,12 +5,19 @@
 <title>bookAdd</title>
 </head>
 <body>
-	<h2>추가 도서정보 입력</h2>
+	<h2>추가할 도서정보 입력</h2>
 	<form th:action="@{/book/booklist}" method="POST">
 		도서명: <input type="text" name="title" placeholder="도서명"><br>
 		저자: <input type="text" name="author" placeholder="저자"><br>
 		ISBN: <input type="text" name="isbn" placeholder="ISBN"><br>
 		<input type="submit" value="입력완료">			
 	</form>
+	
+	<h2>추가된 도서 정보</h2>
+	<ul>
+		<li>도서명: <span th:text="${title}"></span></li> 
+		<li>저자: <span th:text="${author}"></span></li>
+		<li>ISBN: <span th:text="${isbn}" ></span></li>
+	</ul>
 </body>
 </html>

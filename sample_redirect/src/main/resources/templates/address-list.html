@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>주소 등록</h2>
+	<form th:action="@{/add-address}" method="post">
+		이름: <input type="text" name="name"><br>
+		도시: <input type="text" name="city"><br>
+		<button type="submit">주소 추가하기</button>
+	</form>
+	
+
+	<hr>
+	<h2>주소록 목록</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>이름</th>
+				<th>도시</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="li : ${list}">
+				<td th:text="${li.name}"></td>
+				<td th:text="${li.city}"></td>
+			</tr>
+			<tr th:if="${#lists.isEmpty(list)}">
+			<!-- #list.isEmpty =>목록이 비어있으면 이라는 명령어 -->
+				<td colspan="2">등록된 주소가 없습니다</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

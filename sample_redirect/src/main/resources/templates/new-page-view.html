@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>난 new Page야</h2>
+	<p th:if=${msg} th:text="${msg}" id="msg"></p>
+	<!-- if는 조건이 true면(msg가 존재하면) 옆에 th:text를 실행하고 그다음은 p태그를 지워버림 -->
+	
+	<!-- <script>		
+		let msg = document.getElementById("msg");
+		alert(msg.innerText);
+	</script> -->
+</body>
+</html>

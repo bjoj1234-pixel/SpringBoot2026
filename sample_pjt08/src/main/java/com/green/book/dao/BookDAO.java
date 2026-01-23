@@ -4,6 +4,7 @@ package com.green.book.dao;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
 
 //import com.green.AppConfig;
 import com.green.book.dto.BookDTO;
@@ -22,9 +23,17 @@ public class BookDAO {
 	//add(도서추가) 메소드
 	public void addBook(BookDTO bdto) {
 		System.out.println("도서추가입력 메소드");
-		bookList.add(bdto);
+		
 		printRent();
 	}
+	
+	//addresult(도서추가) 메소드
+	public void addResult(Model model) {
+		System.out.println("도서추가입력 메소드");
+		model.addAttribute("list", bookList);
+		printRent();
+	}
+		
 	//전체 도서 메소드
 	public void totalBook(BookDTO bdto) {
 		System.out.println("도서검색 메소드");

@@ -12,6 +12,11 @@ public class BookService {
 	@Autowired
 	BookDAO bookdao;
 	
+//	public void addBookConfirm(BookDTO bdto) {
+//		System.out.println("도서정보 입력화면이야");
+//		bookdao.addBook(bdto);
+//	}
+	
 	public void addBookConfirm(BookDTO bdto) {
 		System.out.println("도서정보 입력화면이야");
 		bookdao.addBook(bdto);
