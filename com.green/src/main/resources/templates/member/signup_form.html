@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/home.css}">
+<link rel="stylesheet" th:href="@{/css/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/member.css}">
+<script type="text/javascript" th:src="@{/js/member.js}"></script>
+</head>
+<body>
+	<header th:replace="~{/include/header_nav_footer.html::header}"></header>
+	<nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+	
+	<section>
+		<div id="section_wrap">
+			<div class="word"><h2>회원가입</h2></div>
+			<div class="content">
+				<!-- form 태그를 이용해서 회원가입 양식 작성 -->
+				<form th:action="@{/member/signup_confirm}"
+				name="signup_form" method="POST">
+					<table width="500" border="1">
+						<tbody>
+							<tr height="50">
+								<td width="150" align="center">아이디</td>
+								<td width="350" align="center">
+									<input type="text" name="id" class="content" placeholder="아이디를 입력하세요">
+								</td>
+							</tr>
+							<tr height="50">
+								<td width="150" align="center">비밀번호</td>
+								<td width="350" align="center">
+									<input type="password" name="pw" class="content" placeholder="비밀번호를 입력하세요">
+								</td>
+							</tr>
+							<tr height="50">
+								<td width="150" align="center">비밀번호확인</td>
+								<td width="350" align="center">
+									<input type="password" name="pwchk" class="content" placeholder="영문과 숫자만 입력하세요">
+								</td>
+							</tr>
+							<tr height="50">
+								<td width="150" align="center">Email</td>
+								<td width="350" align="center">
+									<input type="email" name="mail" class="content" placeholder="@를 포함하여 입력하세요">
+								</td>
+							</tr>
+							<tr height="50">
+								<td width="150" align="center">전화번호</td>
+								<td width="350" align="center">
+									<input type="tel" name="phone" class="content" placeholder="000-0000-0000 형식으로 입력하세요">
+								</td>
+							</tr>
+							<tr height="50">
+								<td colspan="2" align="center">
+									<input type="button" value="회원가입" onclick="signupForm();">
+									<input type="reset" value="취소">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</section>
+	
+	<footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>	
+</body>
+</html>

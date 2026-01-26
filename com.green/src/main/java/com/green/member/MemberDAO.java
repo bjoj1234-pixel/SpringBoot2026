@@ -1,0 +1,125 @@
+package com.green.member;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository //데이터 저장소
+public class MemberDAO {
+	
+	// MySQL Driver 설치 및 JDBC 환경 설정 완료
+	// 외부에서 DataSource를 DI로 삽입한다.
+	
+	@Autowired
+	private DataSource dataSource;
+	
+	//쿼리문 사용할 공간
+	public int insertMember(MemberDTO mdto) {
+		System.out.println("MemberDAO insertMember() 메소드확인");
+		
+		//실무에서 쿼리문 작성시 대문자로 작성함
+		//NO, REG_DATE, MOD_DATE는 default값이 존재하므로 추가하지 않아도 된다.
+		//추가할 필드명이 정해져 있을 경우 반드시 (필드명1, 필드명2...) 필드명을 명시한다.
+		//INSERT INTO user_member(id,pw,mail,phone) VALUES(?,?,?,?);
+		String sql = "INSERT INTO user_member(id,pw,mail,phone) VALUES (?,?,?,?)";
+		int result = 0;
+		
+		//DB는 네트워크를 통해 자료를 가져오므로 try ~ catch() 구문 이용한다.
+		
+		try(	// Connection 클래스를 이용해 dataSource를 getConnection() 해야한다.
+				// 사용하고나면 반드시 반납을 해야함, close()를 해야함. 그래서 밖에 쓰지않고, try안에 넣었음.(밖에 쓰면 여러군데 close()를 넣어줘야됨)
+				// try(Connection~)안에 쓰면, => 자동 close()가 됨
+				Connection conn = dataSource.getConnection(); //데이터와 연결
+				PreparedStatement pstmt = conn.prepareStatement(sql);//데이터에 위의 sql문을 담음.			
+			){
+				// ?,?,?,? 값을 대응해주어야 한다.
+			//input => 입력 => mdto 가방에 담긴 상태
+			//mdto라는 가방에서 필요한 자원을 getId() 꺼내온다.
+				pstmt.setString(1, mdto.getId());
+				pstmt.setString(2, mdto.getPw());
+				pstmt.setString(3, mdto.getMail());
+				pstmt.setString(4, mdto.getPhone());
+				
+				//insert,delete,update구문은 실행명령: executeUpdate()이다.
+				result = pstmt.executeUpdate();
+				//executeUpdate() 메소드의 의미는 insert,delete,update문을 실행하고나면 실행결과를 int데이터타입의 행의 개수로 반환한다는 의미
+				//insert 1건 성공 => 반환값 : 1
+				//insert 0건 중복체크 => 반환값 : 0
+				//update 3건 수정 => 반환값 : 3
+				//delete 5건 삭제 => 반환값 : 5
+				
+				//여기서 서비스의 int result = memberdao.insertMember(mdto); 부분이 실행되어서
+				//결과가 담기면 0이상이 되는거고, 담긴게 없으면 -1이 되는거임.
+				System.out.println("MemberDAO insertMember result값"+result);
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+
+	public boolean isMember(String id) {
+		System.out.println("MemberDAO isMember() 메소드확인");
+		return false;
+	}
+
+	//회원 전체 목록 검색 쿼리
+	public List<MemberDTO> allSelectMember() {
+		System.out.println("MemberDAO allSelectMember() 메소드확인");
+		
+		//전체 목록 검색 sql
+		String sql = "SELECT * FROM user_member";
+		//List<E> 인터페이스므로 => 구현할 수 없다
+		//고로 ArrayList<>를 이용해야 한다.
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		
+		try(	
+				Connection conn = dataSource.getConnection(); //데이터와 연결
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				//select 구문은 executeQuery() 실행한 결과를 ResultSet 객체에 담는다.
+				ResultSet rs = pstmt.executeQuery();
+			){
+				//rs의 결과값:
+				//no	id	pw	main	phone	reg_date	mod_date
+				//1		1	1	1		1		2026~~		2026~~
+				//2		2	2	2		2		2026~~		2026~~
+			
+				//rs.next() 다음행의 값이 존재하면 true, 아니면 false를 반환한다.
+				//while문은 rs.next()가 false가 되는 순간 종료된다.
+				//while문은 rs.next()가 먼저 한 행을 루프돌고, 그 다음행..
+			
+				while (rs.next()) {
+					MemberDTO mdto = new MemberDTO();
+					//mdto가방을 rs의 결과값을 저장하는 용도로 사용할 예정
+					mdto.setNo(rs.getInt("no"));
+					mdto.setId(rs.getString("id"));
+					mdto.setPw(rs.getString("pw"));
+					mdto.setMail(rs.getString("mail"));
+					mdto.setPhone(rs.getString("phone"));
+					mdto.setReg_date(rs.getString("reg_date"));
+					mdto.setMod_date(rs.getString("mod_date"));
+					
+					//ArrayList에 추가한다.
+					list.add(mdto);					
+				}
+				rs.close();
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+}
