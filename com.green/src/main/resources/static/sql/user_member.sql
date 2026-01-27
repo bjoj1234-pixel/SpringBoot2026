@@ -15,3 +15,12 @@ reg_date datetime default now(), -- user의 등록일 check
 mod_date datetime default now() -- user의 수정일 check
 
 );
+
+
+create table board(
+id int auto_increment primary key,
+title varchar(50) not null,
+content varchar(1000) not null,
+writer varchar(20) not null,
+createdAt datetime default now() -- user의 등록일 check
+);

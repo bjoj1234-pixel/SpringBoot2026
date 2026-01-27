@@ -9,17 +9,24 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import com.green.HomeController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository //데이터 저장소
 public class MemberDAO {
+
+    private final HomeController homeController;
 	
 	// MySQL Driver 설치 및 JDBC 환경 설정 완료
 	// 외부에서 DataSource를 DI로 삽입한다.
 	
 	@Autowired
 	private DataSource dataSource;
+
+    MemberDAO(HomeController homeController) {
+        this.homeController = homeController;
+    }
 	
 	//쿼리문 사용할 공간
 	public int insertMember(MemberDTO mdto) {
@@ -121,5 +128,129 @@ public class MemberDAO {
 		
 		return list;
 	}
+	
+	//----------------- 2026년 1월 27일 추가 쿼리 작성 부분
+	//개인 한 사람의 정보를 검색하는 메소드
+	public MemberDTO oneSelectMember(String id) {
+		// Log는 반드시 찍는다.
+		System.out.println("MemberDAO oneSelectMember() 메소드확인");
+		//반환받을 MemberDTO의 객체를 생성한다.
+		MemberDTO mdto = new MemberDTO();
+		//sql구문을 작성
+		String sql = "SELECT * FROM user_member WHERE id=?";
+		//예외처리 try(자동 close를 위해 Connection설정) ~ catch()
+		try(
+				Connection conn = dataSource.getConnection();
+				PreparedStatement pstmt =conn.prepareStatement(sql);//sql문에 ?를 넣으려면 prepareStatement사용
+				){
+				//실행문 작성은 여기
+				//sql의 ?(id) 대응을 먼저 작성한다.
+				pstmt.setString(1, id);//1은 ? 첫번째, 2는 ? 첫번째...
+				//select 문은 반드시 ResultSet객체에 담는다.
+				ResultSet rs = pstmt.executeQuery();
+			
+				//if(rs.next()) 없이 값을 꺼내오면-> 항상 빈 DTO임을 주의하자
+				if(rs.next()) {
+					mdto.setNo(rs.getInt("no"));
+					mdto.setId(rs.getString("id"));
+					mdto.setPw(rs.getString("pw"));
+					mdto.setMail(rs.getString("mail"));
+					mdto.setPhone(rs.getString("phone"));
+					mdto.setReg_date(rs.getString("reg_date"));
+					mdto.setMod_date(rs.getString("mod_date"));
+				}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mdto;
+	}
+	
+	//개인 한사람의 패스워드 리턴하는 쿼리
+	public String getPass(String id) {
+		System.out.println("MemberDAO getPass() 메소드확인");
+
+		String pass = "";
+		String sql = "SELECT pw FROM user_member WHERE id=?";
+		try(
+			Connection conn = dataSource.getConnection();
+			PreparedStatement pstmt =conn.prepareStatement(sql);
+			){
+			pstmt.setString(1, id);
+			
+			ResultSet rs = pstmt.executeQuery(); //select는 ResultSet 객체에 담아서 executeQuery()로 실행한다.
+
+			if(rs.next()) {
+				pass = rs.getString(1);//패스워드 값에 저장된 매핑인덱스
+			}
+			System.out.println("getPass pw="+pass);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return pass;
+		
+	}
+	
+	
+	
+	//개인 한사람의 정보를 수정하는 쿼리
+	//단, 정보 수정할때 패스워드가 일치하는지 확인할것
+	public int updateMember(MemberDTO mdto) {
+		System.out.println("MemberDAO updateMember() 메소드확인");
+		int result = 0;
+
+		String sql = "UPDATE user_member SET mail=?, phone=? WHERE id=?";
+		try(
+				Connection conn = dataSource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+				pstmt.setString(1, mdto.getMail());
+				pstmt.setString(2, mdto.getPhone());
+				pstmt.setString(3, mdto.getId());
+
+				result = pstmt.executeUpdate();//delete, update는 반드시 executeUpdate()를 쓴다.
+
+				System.out.println("UPDATE result"+result);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	// 한사람 개인의 정보를 삭제하는 메소드 작성
+	public int deleteMember(String id) {
+		int result = 0;
+		String sql = "DELETE FROM user_member WHERE id=?";
+		try(
+				Connection conn = dataSource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+				
+				pstmt.setString(1, id);
+				//쿼리문을 실행할때 executeUpdate()는 delete, insert, update문에 사용한다.
+				//select문을 실행할때는 executeQuery() 사용한다.
+				result= pstmt.executeUpdate();			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
