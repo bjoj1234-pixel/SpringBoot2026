@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
 <script type="text/javascript" th:src="@{/js/boardWrite.js}"></script>
 </head>
 <body>
@@ -14,27 +15,29 @@
 				<table width="500" border="1">
 					<tbody>
 						<tr height="50">
-							<th width="150" align="center">작성자</th>
+							<th width="150" align="center">작성자<br><span style="font-size:12px">(20자 이내)</span></th>
 							<td width="350" align="center">
 								<input type="text" name="writer" class="content" placeholder="작성자 이름을 입력하세요." >
 							</td>
 						</tr>
 						<tr height="50">
-							<th width="150" align="center">제목</th>
+							<th width="150" align="center">제목<br><span style="font-size:12px">(50자 이내)</span></th>
 							<td width="350" align="center">
 								<input type="text" name="title" class="content" placeholder="글 제목을 입력하세요." >
 							</td>
 						</tr>
 						<tr height="50">
-							<th width="150" align="center">글내용</th>
+							<th width="150" align="center">글내용<br><span style="font-size:12px">(1,000자 이내)</span></th>
 							<td width="350" align="center">
-								<input type="text" name="content" class="content" placeholder="글 내용을 입력하세요." >
+								<!-- <input type="text" size="100" name="content" class="content" placeholder="글 내용을 입력하세요." > -->
+								<textarea style="width: 360px; height: 290px;border: none; resize: none;" name="content" class="content" placeholder="글 내용을 입력하세요."></textarea>
 							</td>
 						</tr>
 						<tr height="50">
 							<td colspan="2" align="center">
 								<input type="button" value="작성" onclick="bdWrite();">
-								<input type="reset" value="취소">								
+								<input type="reset" value="취소">
+								<a th:href="@{/board/list}" class="btn back">글목록</a>							
 							</td>
 						</tr>					
 					</tbody>				
@@ -42,5 +45,9 @@
 			</form>		
 		</div>			
 	</section>
+	
+	<script th:if="${msg}">//msg가 있으면 뿌리고 없으면 말라는 의미
+		alert('[[${msg}]]')
+	</script>
 </body>
 </html>

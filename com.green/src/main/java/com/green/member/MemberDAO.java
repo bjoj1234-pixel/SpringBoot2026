@@ -15,8 +15,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository //데이터 저장소
 public class MemberDAO {
-
-    private final HomeController homeController;
 	
 	// MySQL Driver 설치 및 JDBC 환경 설정 완료
 	// 외부에서 DataSource를 DI로 삽입한다.
@@ -24,10 +22,6 @@ public class MemberDAO {
 	@Autowired
 	private DataSource dataSource;
 
-    MemberDAO(HomeController homeController) {
-        this.homeController = homeController;
-    }
-	
 	//쿼리문 사용할 공간
 	public int insertMember(MemberDTO mdto) {
 		System.out.println("MemberDAO insertMember() 메소드확인");

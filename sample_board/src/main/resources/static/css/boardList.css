@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+section>.content .btn-wrap{
+	text-align: left;
+	
+}
+.newWrite{
+    background-color:#F0F0F0;
+    width: 120px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    margin: 3px;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+}
