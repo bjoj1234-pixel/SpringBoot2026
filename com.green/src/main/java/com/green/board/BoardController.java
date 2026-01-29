@@ -37,17 +37,44 @@ public class BoardController {
 	
 	//3. DB에서 전체 게시글 목록 select로 검색하여 추출 => 모델(model)객체 담는다.
 	//	 전체목록 화면 boardList.html로 이동한다.
+//	@GetMapping("/board/list")
+//	public String printBoard(Model model) {
+//		System.out.println("1)BoardController printBoard() 메소드호출");
+//		
+//		List<BoardDTO> listboard = boardservice.allBoard();
+//		
+//		model.addAttribute("list", listboard);
+//		
+//		String nextPage = "board/boardList";
+//		return nextPage;		
+//	}
+	
+	//검색을 위한 board/list 커스텀 하기
 	@GetMapping("/board/list")
-	public String printBoard(Model model) {
+	public String boardList(Model model,
+			@RequestParam(value="searchType",required=false) String searchType,
+			@RequestParam(value="searchKeyword",required=false) String searchKeyword
+			) {
 		System.out.println("1)BoardController printBoard() 메소드호출");
 		
-		List<BoardDTO> listboard = boardservice.allBoard();
+		List<BoardDTO> listboard;
 		
+		//검색 종료 후 => 검색내용이 list나오기
+		if(searchType != null && !searchKeyword.trim().isEmpty()) {
+			//서비스에서 searchBoard() 메소드호출
+			listboard = boardservice.searchBoard(searchType, searchKeyword);
+		}else {
+			//검색하지 않고 전체보기 list나오기
+			listboard = boardservice.allBoard();
+		}
+		
+		//검색하지 않고 전체보기 list나오기
 		model.addAttribute("list", listboard);
 		
 		String nextPage = "board/boardList";
 		return nextPage;		
 	}
+	
 	
 	//4. 하나의 게시글 상세정보 확인 핸들러
 	//num 글번호 받아 -> 해당 게시글 DB에서 조회하고, 그 상세정보를 
@@ -92,6 +119,38 @@ public class BoardController {
 		}		
 	}
 	
-	
+	// 7. 하나의 게시글을 삭제하는 컨트롤러
+	// 현재 boardInfo.html의 [삭제하기]버튼 클릭하면 삭제됨
+	// 삭제된 후 board/list로 이동
+	// 삭제 실패 후는 boardInfo.html에 머물다.
+	@GetMapping("/board/deletePro")
+	public String boardDeletePro(
+			@RequestParam("num") int num,
+			@RequestParam("writerPw") String writerPw
+			) {
+		System.out.println("1)BoardController boardDeletePro() 메소드호출");
+
+		// boardService removeBoard()메소드 삭제: true, 실패:false
+		boolean isSuccess = boardservice.removeBoard(num, writerPw);
+		
+		if(isSuccess){
+			return "redirect:/board/list";
+		}else {
+			//삭제 실패 시 상세페이지 그대로 
+			return "redirect:/board/boardInfo?num="+num;
+		}
+		
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+

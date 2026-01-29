@@ -168,5 +168,99 @@ public class BoardDAO {
 		return result;
 	}
 
+	//-----------------20260129 시작부분------------
+	// 게시글 작성시 비밀번호 입력하였기 때문에 => 삭제시에도 비밀번호와 번호가 일치하는지 체크
+	public int deleteBoard(int num, String writerPw) {
+		System.out.println("2) BoardDAO deleteBoard() 메소드 호출 ");
+		
+		int result = 0;
+		
+		//삭제 : delete from 테이블명 where 조건;
+		String sql = "DELETE FROM board WHERE num=? AND writerPw=?";
+		
+		try(
+				Connection conn = dataSource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+			
+			// ? 대응
+			pstmt.setInt(1, num);
+			pstmt.setString(2, writerPw);		
+
+			result = pstmt.executeUpdate();			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	
+	}
+	
+	//내용 또는 제목으로 게시글 검색하는 메소드
+	//검색메소드 반드시, searchType, searchKeyword 매개변수 필요
+	public List<BoardDTO> getSearchBoard(String searchType, String searchKeyword) {
+		System.out.println("2) BoardDAO searchBoard() 메소드 호출 ");
+
+		//List<>인스턴스
+		List<BoardDTO> blist = new ArrayList<>();
+		
+		String sql ="";
+		//boardList => boardList.html 내에 있는 value인 "subject"를 비교하는것임.
+		if("subject".equals(searchType)) {
+			//subject의 검색부분
+			//입력한 문자를 포함하는 검색 명령어
+			//select 필드명 from 테이블명 where 검색필드명 like %키워드%;
+			sql = "SELECT * FROM board WHERE subject LIKE ? ORDER BY num DESC";
+		}else {
+			//content의 검색부분
+			sql = "SELECT * FROM board WHERE content LIKE ? ORDER BY num DESC";
+		}
+		
+		try(
+				Connection conn = dataSource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+			
+			pstmt.setString(1, "%"+searchKeyword+"%");//if문이라 1개만 써도됨			
+			
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				BoardDTO bdto = new BoardDTO();
+				bdto.setNum(rs.getInt("num"));
+				bdto.setWriter(rs.getString("writer"));
+				bdto.setSubject(rs.getString("subject"));
+				bdto.setWriterPw(rs.getString("writerPw"));
+				bdto.setReg_date(rs.getString("reg_date").toString());
+				bdto.setReadcount(rs.getInt("readcount"));
+				bdto.setContent(rs.getString("content"));
+				
+				blist.add(bdto);				
+			}		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return blist;
+		
+		
+	}
+
+	
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

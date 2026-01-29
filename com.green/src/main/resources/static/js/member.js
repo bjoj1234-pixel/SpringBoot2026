@@ -23,3 +23,23 @@ function signupForm(){
 		form.submit();
 	}
 }
+
+/*로그인 예외처리*/
+function loginForm(){
+	console.log("로그인폼");
+	
+	/* DOM으로 form을 연결 */
+	let form = document.login_form;//form태그 name과 같게
+	
+	if(form.id.value === ""){
+		alert("새로운 id 입력");
+		/* 커서를 id로 지정 */
+		form.id.focus();
+	}else if(form.pw.value === ""){
+		alert("새로운 pw 입력");
+		form.pw.focus();
+	}else{
+		/* 전송해라 */
+		form.submit();
+	}
+}

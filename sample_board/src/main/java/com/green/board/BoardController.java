@@ -40,11 +40,30 @@ public class BoardController {
 	
 	//게시판 전체 목록
 	@GetMapping("/board/list")
-	public String boardList(Model model) {
+	public String boardList(Model model,Model model2,
+			@RequestParam(value="searchType",required=false) String searchType,
+			@RequestParam(value="searchKeyword",required=false) String searchKeyword
+			) {
 		System.out.println("BoardController boardList() 메소드 확인");
 		
-		List<BoardDTO> boardlist = boardService.boardListService();
+		//검색창 searchType을 작성일로 선택했을때
+		if("createdAt".equals(searchType)) {
+			model2.addAttribute("createdAt", true);
+		}else {//검색창 searchType을 작성일외에 다른걸 선택했을때
+			model2.addAttribute("createdAt", false);
+		}
+	
+		List<BoardDTO> boardlist;
+		
+		//검색을 했을떄
+		if(searchType != null && !searchKeyword.trim().isEmpty()) {
+			boardlist = boardService.getSearchBoardService(searchType, searchKeyword);
+		}else {//검색을 안했을때
+			boardlist = boardService.boardListService();
+		}
+		//게시글 리스트 저장
 		model.addAttribute("list", boardlist);
+		
 		
 		String nextPage="board/boardList";
 		return nextPage;

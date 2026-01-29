@@ -47,6 +47,7 @@
 									<form th:action="@{/board/deletePro}" method="GET">
 										<!-- 삭제할 게시글의 번호, 비밀번호를 알아야 삭제가능 -->
 										<!-- input type="hidden"이면 숨겨진 상태로 value값을 떠넘겨 줄 수 있다. -->
+										<!-- 꼭 form안에 존재해야한다 -->
 										<input type="hidden" name="num" th:value="${oneboard.num}">										
 										<input type="hidden" name="writerPw" th:value="${oneboard.writerPw}">									
 

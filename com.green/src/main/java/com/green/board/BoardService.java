@@ -46,6 +46,46 @@ public class BoardService {
 		}
 	}
 	
-
+	//게시글 하나를 삭제하는 메소드
+	public boolean removeBoard(int num, String writerPw) {
+		System.out.println("3)BoardService removeBoard() 메소드호출");
+		//DAO에서 받아오는 deleteBoard()는 삭제=1, 아니면 0
+		int result = boardDAO.deleteBoard(num, writerPw);
+		
+		if(result > 0) {
+			System.out.println("게시글 삭제 성공");
+			return true;
+		}else {
+			System.out.println("게시글 삭제 실패(비밀번호 불일치)");
+			return false;
+		}
+	}
+	
+	
+	//게시글 검색 메소드
+	public List<BoardDTO> searchBoard(String searchType, String searchKeyword){
+		System.out.println("3)BoardService searchBoard() 메소드호출");
+		System.out.println("3)searchType :"+searchType);
+		System.out.println("3)searchKeyword :"+searchKeyword);
+		return boardDAO.getSearchBoard(searchType,searchKeyword);
+	}
+	
+	
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

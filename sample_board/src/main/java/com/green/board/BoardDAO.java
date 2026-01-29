@@ -24,7 +24,7 @@ public class BoardDAO {
 	public int boardWriteDAO(BoardDTO bdto) {
 		System.out.println("BoardDAO boardWriteDAO() 메소드확인");
 		
-		String sql = "INSERT INTO board(title,content,writer) VALUES(?,?,?)";
+		String sql = "INSERT INTO board2(title,content,writer) VALUES(?,?,?)";
 		int result = 0;
 		try(
 				Connection conn = datasource.getConnection();
@@ -47,7 +47,7 @@ public class BoardDAO {
 	public List<BoardDTO> boardListDAO(){
 		System.out.println("BoardDAO boardListDAO() 메소드확인");
 		
-		String sql = "SELECT * FROM board";
+		String sql = "SELECT * FROM board2";
 		
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
 		
@@ -83,7 +83,7 @@ public class BoardDAO {
 		System.out.println("BoardDAO boardDeleteDAO() 메소드확인");
 
 		int result=0;
-		String sql = "DELETE FROM board WHERE id=?";
+		String sql = "DELETE FROM board2 WHERE id=?";
 		try(
 				Connection conn = datasource.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -103,7 +103,7 @@ public class BoardDAO {
 		
 		BoardDTO bdto = new BoardDTO();
 		
-		String sql = "SELECT * FROM board WHERE id=?";
+		String sql = "SELECT * FROM board2 WHERE id=?";
 		
 		try(
 				Connection conn = datasource.getConnection();
@@ -132,7 +132,7 @@ public class BoardDAO {
 		System.out.println("BoardDAO boardModifySubmitDAO() 메소드확인");
 		int result = 0;
 		
-		String sql = "UPDATE board SET title=?, content=?, writer=? WHERE id=?";
+		String sql = "UPDATE board2 SET title=?, content=?, writer=? WHERE id=?";
 		
 		try(
 				Connection conn = datasource.getConnection();
@@ -149,10 +149,51 @@ public class BoardDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		return result;
-		
+		return result;		
 	}
 
+	//검색 메소드 쿼리
+	public List<BoardDTO> getSearchBoardDAO(String searchType, String searchKeyword){
+		System.out.println("BoardDAO getSearchBoard() 메소드확인");
+		
+		List<BoardDTO> searchList = new ArrayList<BoardDTO>();
+		
+		String sql="";
+		
+		if("title".equals(searchType)) {
+			sql = "SELECT * FROM board2 WHERE title LIKE ? ORDER BY id DESC";
+		}else if("content".equals(searchType)) {
+			sql = "SELECT * FROM board2 WHERE content LIKE ? ORDER BY id DESC";
+		}else if("writer".equals(searchType)){
+			sql = "SELECT * FROM board2 WHERE writer LIKE ? ORDER BY id DESC";
+		}else {
+			sql = "SELECT * FROM board2 WHERE createdAt LIKE ? ORDER BY id DESC";
+		}
+		
+		try(
+				Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				){
+			pstmt.setString(1, "%"+searchKeyword+"%");
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardDTO bdto = new BoardDTO();
+				bdto.setId(rs.getInt("id"));
+				bdto.setTitle(rs.getString("title"));
+				bdto.setContent(rs.getString("content"));
+				bdto.setWriter(rs.getString("writer"));
+				bdto.setCreatedAt(rs.getString("createdAt"));
+				
+				searchList.add(bdto);
+			}			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return searchList;
+	}
 	
 
 

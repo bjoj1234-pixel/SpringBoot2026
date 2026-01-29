@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class MemberController {
 	
@@ -31,19 +33,13 @@ public class MemberController {
 	@PostMapping("/member/signup_confirm")
 	public String signupConfirm(MemberDTO mdto,Model model) { //@RequestParam은 7개나 불러와야되서, 편의를 위해 DTO를 사용함.
 		System.out.println("MemberController signupConfirm() 메소드 확인");
-		String nextPage = "member/signup_result";
 		//회원가입이 제대로 되었는지, 혹은 회원가입이 실패했는지 예외처리
 		int result = memberservice.signupConfirm(mdto); //여기다 적어서 create method로 서비스에 메소드 생성가능
 		//서비스에서 중복아이디가 있냐 없냐에따라 1,0,-1를 담아서 갖고옴.
-		
-		// 회원가입이 성공하였을 경우 => 회원 목록인 새로운 주소로 이동(리다이렉트)
-		if(result == memberservice.user_id_success) {
-			return "redirect:/member/list";
-		}else {
-			//회원가입이 실패한 경우
-			model.addAttribute("result", result);
-			return nextPage;
-		}		
+		model.addAttribute("result", result);
+				
+		String nextPage = "member/signup_result";
+		return nextPage;
 	}
 	
 	//회원 전체 목록화면 호출
@@ -136,6 +132,61 @@ public class MemberController {
 	}
 	
 	
+	//로그인 양식 폼
+	@GetMapping("/member/login")
+	public String loginForm() {
+		System.out.println("MemberController loginForm() 메소드 확인");
+		String nextPage="member/login_form";
+		return nextPage;
+	}
+		
+	//로그인을 처리하기 위한 컨트롤러
+	@PostMapping("/member/loginPro")
+	public String loginPro(MemberDTO mdto,HttpSession session,RedirectAttributes re) {
+		System.out.println("MemberController loginPro 메소드 확인");
+
+		MemberDTO logInMember = memberservice.loginConfirm(mdto);
+		
+		//Model객체는 요청 1번짜리 이다.
+		//화면 이동하면 => 바로 사라짐
+		//로그인 유지가 안됨
+		
+		//Session(세션) => 스프링부트의 내장 객체이다.(그냥 꺼내쓰면 됨)
+		//세션이란 ? 서버가 사용자 한명을 기억하기위해 사용하는 저장공간
+		//=>로그인 유지가 가능(로그아웃 하기전까지 계속 로그인되있음)
+		//HttpSession 클래스이름
+		
+		//Session 기본 3가지 명령어
+		//1. 세션에 값 저장하기
+		//session.setAttribute("이름",값) => 로그인 성공시 사용
+		//2. 세션에 저장된 값 가져오기
+		//session.getAttribute("이름") => 로그인 여부 확인
+		//3. 세션 전체삭제
+		//session.invalidate(); => 로그아웃시
+		
+		if(logInMember != null) {
+			//로그인 성공
+			session.setAttribute("loginmember", logInMember);
+			re.addFlashAttribute("msg", "로그인 되었습니다.");
+			//로그인 성공시 홈으로 이동
+			return "redirect:/";
+		}else {
+			re.addFlashAttribute("msg", "로그인 실패");
+			//로그인 실패시 홈으로 이동
+			return "redirect:/member/login";			
+		}
+	}
+	
+	//로그아웃
+	@GetMapping("/member/logout")
+	public String loginout(HttpSession session) {
+		System.out.println("MemberController loginout 메소드 확인");
+		//1. session에 담겨있으므로 session.invalidate()로 세션객체 완전 삭제함
+		session.invalidate();
+		
+		//로그아웃시 home으로 이동
+		return "redirect:/";
+	}
 	
 
 	

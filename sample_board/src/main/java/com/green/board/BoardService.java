@@ -47,4 +47,12 @@ public class BoardService {
 		return boarddao.boardModifySubmitDAO(bdto) == 1;
 	}
 	
+	//검색 메소드
+	public List<BoardDTO> getSearchBoardService(String searchType, String searchKeyword){
+		System.out.println("BoardService getSearchBoardService() 메소드확인");
+		System.out.println("BoardService searchType 확인:"+searchType);
+		System.out.println("BoardService searchKeyword 확인:"+searchKeyword);
+		return boarddao.getSearchBoardDAO(searchType,searchKeyword);	
+	}
+
 }

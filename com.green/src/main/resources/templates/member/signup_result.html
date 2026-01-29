@@ -15,12 +15,12 @@
 	
 	<section>
 		<div id="section_wrap">
-			<div class="word"><h2>회원가입</h2></div>
+			<div class="word"><h2>회원가입 결과</h2></div>
 			<div class="content">
-				<div th:if="${result>0}">
+				<div th:if="${result>0}" align="center">
 					<h2>회원가입 성공</h2>
 				</div>
-				<div th:if="${result<=0}">
+				<div th:if="${result<=0}" align="center">
 					<h2>회원가입 실패</h2>
 				</div>
 			</div>
