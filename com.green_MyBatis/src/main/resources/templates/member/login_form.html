@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/home.css}">
+<link rel="stylesheet" th:href="@{/css/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/member.css}">
+<script type="text/javascript" th:src="@{/js/member.js}"></script>
+</head>
+<body>
+	<header th:replace="~{/include/header_nav_footer.html::header}"></header>
+	<nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+	
+	<section>
+		<div id="section_wrap">
+			<div class="word"><h2>로그인</h2></div>
+			<div class="content">
+				<!-- form 태그를 이용해서 회원가입 양식 작성 -->
+				<form th:action="@{/member/loginPro}"
+				name="login_form" method="POST">
+				<!-- <input type="hidden" name="id" th:value="${login.id}">
+				<input type="hidden" name="pw" th:value="${login.pw}"> -->
+					<table width="500" border="1">
+						<tbody>
+							<tr height="50">
+								<td width="150" align="center">아이디</td>
+								<td width="350" align="center">
+									<input type="text" name="id" class="content" placeholder="아이디를 입력하세요">
+								</td>
+							</tr>
+							<tr height="50">
+								<td width="150" align="center">비밀번호</td>
+								<td width="350" align="center">
+									<input type="password" name="pw" class="content" placeholder="비밀번호를 입력하세요">
+								</td>
+							</tr>
+							<tr height="50">
+								<td colspan="2" align="center">
+									<input type="button" value="로그인" onclick="loginForm();">
+									<input type="button" value="회원가입" th:onclick="|location.href='@{/member/signup}'|">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</section>
+	
+	<footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>
+	
+	<script th:if="${msg}">//msg가 있으면 뿌리고 없으면 말라는 의미
+		alert('[[${msg}]]')
+	</script>	
+</body>
+</html>

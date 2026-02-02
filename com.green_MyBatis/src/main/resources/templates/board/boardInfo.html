@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/home.css}">
+<link rel="stylesheet" th:href="@{/css/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/board.css}">
+<script type="text/javascript" th:src="@{/js/member.js}"></script>
+</head>
+<body>
+	<header th:replace="~{/include/header_nav_footer.html::header}"></header>
+	<nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+	
+	<section>
+		<div id="section_wrap">
+			<div class="word"><h2>게시글 보기</h2></div>
+			<div class="content">
+				
+					<table width="500" border="1">
+						<tbody>
+							<tr height="40">
+								<td width="120" align="center">글번호</td>
+								<td width="180" align="center" th:text="${oneboard.num}"></td>
+								<td width="120" align="center">조회수</td>
+								<td width="180" align="center" th:text="${oneboard.readcount}"></td>
+							</tr>
+							<tr height="40">
+								<td width="120" align="center">작성자</td>
+								<td width="180" align="center" th:text="${oneboard.writer}"></td>
+								<td width="120" align="center">작성일</td>
+								<td width="180" align="center" th:text="${oneboard.reg_date}"></td>
+							</tr>
+							<tr height="40">
+								<td width="120" align="center">제목</td>
+								<td align="center" colspan="3" th:text="${oneboard.subject}"></td>
+							</tr>
+							<tr height="40">
+								<td width="120" align="center">글내용</td>
+								<td align="center" colspan="3" th:text="${oneboard.content}"></td>
+							</tr>					
+							<tr height="40">
+								<td align="center" colspan="4">
+									<input type="button" value="수정하기" th:onclick="|location.href='@{/board/update(num=${oneboard.num})}'|">									
+									
+									<form th:action="@{/board/deletePro}" method="GET">
+										<!-- 삭제할 게시글의 번호, 비밀번호를 알아야 삭제가능 -->
+										<!-- input type="hidden"이면 숨겨진 상태로 value값을 떠넘겨 줄 수 있다. -->
+										<!-- 꼭 form안에 존재해야한다 -->
+										<input type="hidden" name="num" th:value="${oneboard.num}">										
+										<input type="hidden" name="writerPw" th:value="${oneboard.writerPw}">									
+
+										<input type="submit" value="삭제하기" onclick="return confirm('정말로 삭제하시겠습니까?')">
+										<!-- form 보내는건 onclick에 th삽입 X -->
+									</form>
+									
+									<input type="button" value="목록보기" th:onclick="|location.href='@{/board/list}'|">
+								</td>
+							</tr>					
+						</tbody>
+					</table>
+
+			</div>
+		</div>
+	</section>
+	
+	<footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>	
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/home.css}">
+<link rel="stylesheet" th:href="@{/css/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/member.css}">
+<script type="text/javascript" th:src="@{/js/member.js}"></script>
+</head>
+<body>
+	<header th:replace="~{/include/header_nav_footer.html::header}"></header>
+	<nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+	
+	<section>
+		<div id="section_wrap">
+			<div class="word"><h2>개인 회원 상세정보</h2></div>
+			<div class="content">
+				<table border="1">
+					<tbody>
+						<tr>
+							<th>아이디</th>
+							<td th:text="${onelist.id}"></td>
+						</tr>
+						<tr>
+							<th>이메일</th>
+							<td th:text="${onelist.mail}"></td>
+						</tr>
+						<tr>
+							<th>전화</th>
+							<td th:text="${onelist.phone}"></td>
+						</tr>
+						<tr>
+							<th>등록일</th>
+							<td th:text="${onelist.reg_date}"></td>
+						</tr>						
+					</tbody>
+				</table>
+				
+				<!-- 버튼 : [회원수정],[회원삭제],[목록보기],[회원가입]생성 -->
+				<div class="btn-area">
+					<a th:href="@{/member/modify(id=${onelist.id})}" class="btn">회원수정</a>
+					<a th:href="@{/member/delete(id=${onelist.id})}" class="btn btn-danger"
+					onclick="return confirm('정말 삭제하시겠습니까? 삭제된 데이터는 복구 불가능');">회원삭제</a>
+					<a th:href="@{/member/list}" class="btn">목록보기</a>
+					<a th:href="@{/member/signup}" class="btn">회원가입</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>	
+</body>
+</html>

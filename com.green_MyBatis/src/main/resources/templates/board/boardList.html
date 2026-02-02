@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/home.css}">
+<link rel="stylesheet" th:href="@{/css/header_nav_footer.css}">
+<link rel="stylesheet" th:href="@{/css/board.css}">
+<!-- defer란 HTML을 먼저 만들고 JavaScript 실행하라는 의미임 -->
+
+<script type="text/javascript" th:src="@{/js/member.js}" defer></script>
+</head>
+<body>
+	<header th:replace="~{/include/header_nav_footer.html::header}"></header>
+	<nav th:replace="~{/include/header_nav_footer.html::nav}"></nav>
+	
+	<section>
+		<div id="section_wrap">
+			<div class="word"><h2>게시글 목록 보기</h2></div>
+			<div class="content">
+					<table width="500" border="1">
+						<tbody>
+							<tr height="50">
+								<td width="150" align="center">
+									<!-- <a th:href="@{/board/write}" class="write-btn">글쓰기</a> -->
+									<!-- 로그인이 된 상태에서만 게시글을 쓰도록 정의할 예정 -->
+									<a href="#" class="write-btn" id="writeBtn"
+										th:data-login="${session.loginmember != null}"
+									>글쓰기</a>
+								</td>
+							</tr>
+							<tr height="50">
+								<td width="50" align="center">번호</td>
+								<td width="320" align="center">제목</td>
+								<td width="100" align="center">작성자</td>
+								<td width="150" align="center">작성일자</td>
+								<td width="80" align="center">조회수</td>
+							</tr>
+							<tr th:each="li:${list}">
+								<td th:text="${li.num}"></td>
+								<td>
+									<a th:href="@{/board/boardInfo(num=${li.num})}" th:text="${li.subject}"></a>
+								</td>
+								<td th:text="${li.writer}"></td>								
+								<td th:text="${li.reg_date}"></td>								
+								<td th:text="${li.readcount}"></td>								
+							</tr>
+						</tbody>
+					</table>
+					<div id="search_wrap">
+						<form th:action="@{/board/list}" method="GET">
+							
+							<select name="searchType">
+								<option value="subject">제목</option>
+								<option value="content">내용</option>
+							</select>
+							<input type="text" name="searchKeyword" placeholder="검색어를 입력하세요">
+							<input type="submit" value="검색" name="searchBtn">
+							<input type="button" value="전체보기" name="searchBtn"
+							th:onclick="|location.href='@{/board/list}'|">						
+							
+						</form>			
+					</div>
+			</div>
+		</div>
+	</section>
+	
+	<footer th:replace="~{/include/header_nav_footer.html::footer}"></footer>	
+</body>
+</html>

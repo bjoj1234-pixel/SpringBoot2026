@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.green.board.mapper.BoardMapper;
+
 @Service
 public class BoardService {
 	
@@ -14,37 +16,40 @@ public class BoardService {
 	public final static int board_write_fail = -1;
 		
 	
+	//@Autowired
+//	BoardDAO boarddao;
+	
 	@Autowired
-	BoardDAO boarddao;
+	private BoardMapper boardmapper;
 	
 	//글작성 메소드
 	public int boardWriteConfirmService(BoardDTO bdto) {
 		System.out.println("BoardService boardWriteConfirm() 메소드확인");
-		return boarddao.boardWriteDAO(bdto);
+		return boardmapper.boardWriteDAO(bdto);
 	}
 	
 	//게시판 전체목록 출력 메소드
 	public List<BoardDTO> boardListService(){
 		System.out.println("BoardService boardListDAO() 메소드확인");
-		return boarddao.boardListDAO();
+		return boardmapper.boardListDAO();
 	}
 	
 	//글삭제 메소드
 	public boolean boardDeleteService(int id) {
 		System.out.println("BoardService boardDeleteService() 메소드확인");
-		return boarddao.boardDeleteDAO(id) == 1; //true(삭제) or false(삭제실패) 반환
+		return boardmapper.boardDeleteDAO(id) == 1; //true(삭제) or false(삭제실패) 반환
 	}
 	
 	//글수정 화면출력 메소드
 	public BoardDTO boardModifyService(int id) {
 		System.out.println("BoardService boardModifyService() 메소드확인");
-		return boarddao.boardModifyDAO(id);
+		return boardmapper.boardModifyDAO(id);
 	}
 	
 	//글수정 메소드
 	public boolean boardModifySubmitService(BoardDTO bdto) {
 		System.out.println("BoardService boardModifySubmitService() 메소드확인");
-		return boarddao.boardModifySubmitDAO(bdto) == 1;
+		return boardmapper.boardModifySubmitDAO(bdto) == 1;
 	}
 	
 	//검색 메소드
@@ -52,7 +57,7 @@ public class BoardService {
 		System.out.println("BoardService getSearchBoardService() 메소드확인");
 		System.out.println("BoardService searchType 확인:"+searchType);
 		System.out.println("BoardService searchKeyword 확인:"+searchKeyword);
-		return boarddao.getSearchBoardDAO(searchType,searchKeyword);	
+		return boardmapper.getSearchBoardDAO(searchType,searchKeyword);	
 	}
 
 }

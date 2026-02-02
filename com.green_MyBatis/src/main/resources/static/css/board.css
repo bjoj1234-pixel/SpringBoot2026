@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+/* ===== 공통 레이아웃 ===== */
+#section_wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 0;
+}
+
+/* ===== 페이지 제목 ===== */
+.word {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: #222;
+    text-align: center;
+}
+
+/* ===== 카드 영역 ===== */
+.content {
+    width: 760px;
+    background: #fff;
+    padding: 30px 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* ===== 테이블 ===== */
+.content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    border: 1px solid #ccc;   /* ★ 테이블 외곽선 */
+}
+
+/* 모든 셀 공통 */
+.content td {
+    padding: 12px 10px;
+    border: 1px solid #ddd;   /* ★ 셀 border 명확 */
+    text-align: center;
+}
+
+/* 라벨 셀 */
+.content td:first-child {
+    background: #f9f9f9;
+    font-weight: 600;
+    color: #444;
+}
+
+/* 제목(게시글 제목 컬럼 등) */
+.content td a {
+    color: #222;
+    text-decoration: none;
+}
+
+/* hover */
+.content table tr:hover {
+    background-color: #fafafa;
+}
+
+/* ===== 입력 요소 ===== */
+.content input[type="text"],
+.content input[type="password"],
+.content textarea,
+.content select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* ===== 버튼 공통 ===== */
+.content input[type="button"],
+.content input[type="submit"],
+.content input[type="reset"],
+.write-btn {
+    min-width: 90px;          /* ★ 버튼 사이즈 통일 */
+    height: 34px;
+    padding: 0 14px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+    background: #f7f7f7;      /* ★ 연한 색 */
+    color: #333;
+    cursor: pointer;
+}
+
+/* 버튼 hover */
+.content input[type="button"]:hover,
+.content input[type="submit"]:hover,
+.content input[type="reset"]:hover,
+.write-btn:hover {
+    background: #eee;
+}
+
+/* ===== 글쓰기 버튼 위치 ===== */
+.content table tr:first-child td {
+    text-align: right;
+    background: #fff;
+    border: none;
+}
+
