@@ -1,13 +1,13 @@
-package com.green;
+package com.myboard.board;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SampleBoardApplication {
+public class MyboardApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SampleBoardApplication.class, args);
+		SpringApplication.run(MyboardApplication.class, args);
 	}
 
 }

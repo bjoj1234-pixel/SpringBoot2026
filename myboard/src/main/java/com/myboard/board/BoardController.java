@@ -1,4 +1,4 @@
-package com.green.board;
+package com.myboard.board;
 
 import java.util.List;
 

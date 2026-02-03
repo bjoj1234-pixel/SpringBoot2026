@@ -1,11 +1,11 @@
-package com.green.board;
+package com.myboard.board;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.green.board.mapper.BoardMapper;
+import com.myboard.board.mapper.BoardMapper;
 
 @Service
 public class BoardService {
@@ -17,7 +17,7 @@ public class BoardService {
 		
 	
 	//@Autowired
-//	BoardDAO boarddao;
+
 	
 	@Autowired
 	private BoardMapper boardmapper;

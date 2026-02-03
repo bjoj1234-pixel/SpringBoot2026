@@ -63,6 +63,18 @@
 	 ORDER BY num DESC
 </select>
 
+<!-- 전체 게시글 수 -->
+<select id="getAllcount" resultType="int">
+	SELECT COUNT(*) FROM board
+</select>
+
+<!-- startRow ~ 한 페이지에 보여줄 레코드(=행의) 개수(pageSize)만큼 보여주는 메소드 -->
+<select id="getPagelist" resultType="BoardDTO">
+	SELECT * FROM board ORDER BY num DESC LIMIT #{startRow}, #{pageSize}
+</select>
+
+
+
 
 </mapper>
 

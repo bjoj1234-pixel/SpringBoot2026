@@ -78,6 +78,18 @@ public class BoardService {
 		return boardmapper.getSearchBoard(searchType,searchKeyword);
 	}
 	
+	//전체 게시글수 검색하는 메소드
+	public int getAllcount() {
+		System.out.println("3)BoardService getAllcount() 메소드호출");
+		return boardmapper.getAllcount();
+	}
+	
+	//startRow ~ pageSize까지의 행 출력
+	public List<BoardDTO> getPagelist(int startRow, int pageSize){
+		System.out.println("3)BoardService getPagelist() 메소드호출");
+		return boardmapper.getPagelist(startRow, pageSize); 
+	}
+	
 	
 
 }

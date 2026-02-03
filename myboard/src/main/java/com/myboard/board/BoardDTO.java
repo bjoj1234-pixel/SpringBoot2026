@@ -1,4 +1,4 @@
-package com.green.board;
+package com.myboard.board;
 
 public class BoardDTO {
 	private int id;//게시글번호(PK) - 자동증가

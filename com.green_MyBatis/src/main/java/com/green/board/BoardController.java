@@ -13,6 +13,7 @@ import com.green.member.MemberDTO;
 
 import jakarta.servlet.http.HttpSession;
 
+
 @Controller
 public class BoardController {
 	
@@ -73,9 +74,20 @@ public class BoardController {
 	@GetMapping("/board/list")
 	public String boardList(Model model,
 			@RequestParam(value="searchType",required=false) String searchType,
-			@RequestParam(value="searchKeyword",required=false) String searchKeyword
+			@RequestParam(value="searchKeyword",required=false) String searchKeyword,
+			//1. 페이지 번호 => 1부터 시작이므로 초기값 1로 정의한다.
+			@RequestParam(value="page",defaultValue = "1") int page,
+			//2. 페이지 사이즈 => 한 화면에 보여지는 게시글의 개수를 5로 초기화한다.
+			@RequestParam(value="pageSize",defaultValue = "5") int pageSize
 			) {
 		System.out.println("1)BoardController printBoard() 메소드호출");
+		
+		//3. 전체 게시글의 개수인 totalCnt 메소드 가져오기
+		int totalCnt = boardservice.getAllcount();
+		System.out.println("전체행의 개수"+ totalCnt);
+		
+		//4. PageHandler 클래스 접근하기위해 인스턴스화 한다.		
+		PageHandler ph = new PageHandler(totalCnt,page,pageSize);
 		
 		List<BoardDTO> listboard;
 		
@@ -85,11 +97,19 @@ public class BoardController {
 			listboard = boardservice.searchBoard(searchType, searchKeyword);
 		}else {
 			//검색하지 않고 전체보기 list나오기
-			listboard = boardservice.allBoard();
+			//boardservice.allBoard() => 사용못하는 이유는?
+			//=>페이징이 안된 모든 레코드가 출력되는 메소드이므로
+			listboard = boardservice.getPagelist(ph.getStartRow(),pageSize);
+			
 		}
+		//System.out.print(listboard);
 		
 		//검색하지 않고 전체보기 list나오기
 		model.addAttribute("list", listboard);
+		
+		//pageHandler 클래스 모두 model객체에 담아서 html로 보내야함
+		//그래야 UI 화면에 페이징 그릴 수 있다.
+		model.addAttribute("ph", ph); //PageHandler 클래스를 인스턴스한 참조변수이다.
 		
 		String nextPage = "board/boardList";
 		return nextPage;		

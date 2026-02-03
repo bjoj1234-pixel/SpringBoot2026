@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="MemberMapper"의 패키지 경로 복사 붙이기 할 것. 인터페이스 이름  -->
+<mapper namespace="com.myboard.board.mapper.BoardMapper">
+
+
+<!-- 하나의 게시글 작성하여 추가하는 쿼리문 -->
+<insert id="insertBoard" parameterType="BoardDTO" >
+	INSERT INTO board(writer,subject,writerPw,content,id)
+	VALUES(#{writer},#{subject},#{writerPw},#{content},#{id})
+</insert>
+
+<!-- 전체 게시글 목록을 출력하는 쿼리문 -->
+<!-- public List<BoardDTO> getAllBoard(); -->
+<select id="getAllBoard" resultType="BoardDTO">
+	SELECT * FROM board ORDER BY num DESC 
+</select>
+
+<!-- Readcount 누적하여 조회수를 증가하는 메소드 -->
+<update id="upReadCount" parameterType="int">
+	UPDATE board SET readcount = readcount+1 WHERE num=#{num}
+</update>
+
+<!-- 하나의 게시글 상세정보보기 -->
+<select id="getOneBoard" resultType="BoardDTO" parameterType="int">
+	SELECT * FROM board WHERE num=#{num}
+</select>
+
+<!-- 하나의 게시글을 수정하는 메소드 -->
+<update id="updateBoard" parameterType="BoardDTO">
+	UPDATE board SET subject=#{subject}, content=#{content}
+	WHERE num=#{num} AND writerPw=#{writerPw}
+</update>
+
+<!-- 글을 삭제하는 메소드 -->
+<!-- @Param("num") int num,@Param("writerPw") String writerPw 
+매퍼에서 파라미터로 매개변수 값을 받은 경우 SQL문에서 매개변수 생략한다.
+-->
+<delete id="deleteBoard">
+	DELETE FROM board WHERE num=#{num} AND writerPw=#{writerPw}
+</delete>
+
+<!-- 내용 또는 제목으로 게시글 검색하는 메소드 -->
+<!-- 검색: 
+@Param("searchType") String searchType,
+@Param("searchKeyword") String searchKeyword
+-->
+<select id="getSearchBoard" resultType="BoardDTO">
+	SELECT * FROM board
+	<where><!-- SQL where절을 태그로 사용가능 -->
+		<choose>
+		<!-- <when test="조건식 => a == b">  -->
+			<when test="searchType == 'subject'">
+				subject LIKE CONCAT("%", #{searchKeyword}, "%")
+			</when><!-- when = else if와 같음. when을 여러개 쓰면 else if가 반복되는거임  -->
+			<otherwise><!-- otherwise = else와 같음. -->
+				content LIKE CONCAT("%", #{searchKeyword}, "%")
+			</otherwise>
+		</choose>
+	</where>
+	 ORDER BY num DESC
+</select>
+
+<!-- 전체 게시글 수 -->
+<select id="getAllcount" resultType="int">
+	SELECT COUNT(*) FROM board
+</select>
+
+<!-- startRow ~ 한 페이지에 보여줄 레코드(=행의) 개수(pageSize)만큼 보여주는 메소드 -->
+<select id="getPagelist" resultType="BoardDTO">
+	SELECT * FROM board ORDER BY num DESC LIMIT #{startRow}, #{pageSize}
+</select>
+
+
+
+
+</mapper>
+
+

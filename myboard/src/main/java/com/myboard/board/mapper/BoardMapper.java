@@ -1,11 +1,12 @@
-package com.green.board.mapper;
+package com.myboard.board.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.green.board.BoardDTO;
+
+import com.myboard.board.BoardDTO;
 
 @Mapper
 public interface BoardMapper {
