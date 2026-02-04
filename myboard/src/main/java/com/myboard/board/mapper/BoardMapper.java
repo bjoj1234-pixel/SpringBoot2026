@@ -14,6 +14,9 @@ public interface BoardMapper {
 	public int boardWriteDAO(BoardDTO bdto);
 	
 	//게시판 전체목록 쿼리
+	// ------ 2026년 2월 3일 오류 -------
+	// boardListDAO() 메소드가 board-mapper.xml에 존재하지 않는데
+	// boardService에서 사용하고 있어서 생기는 오류 입니다.
 	public List<BoardDTO> boardListDAO();
 	
 	//게시글 삭제 쿼리

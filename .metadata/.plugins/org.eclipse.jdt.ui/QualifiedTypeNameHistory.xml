@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.Timer"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Configurable"/>
     <fullyQualifiedTypeName name="com.green.MemberService"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
@@ -25,7 +24,6 @@
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="com.green.board.BoardDAO"/>
     <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
-    <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
     <fullyQualifiedTypeName name="java.lang.Boolean"/>
     <fullyQualifiedTypeName name="com.green.board.BoardService"/>
@@ -36,23 +34,16 @@
     <fullyQualifiedTypeName name="org.springframework.security.config.annotation.web.builders.HttpSecurity"/>
     <fullyQualifiedTypeName name="org.springframework.security.crypto.password.PasswordEncoder"/>
     <fullyQualifiedTypeName name="org.springframework.web.servlet.mvc.support.RedirectAttributes"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
     <fullyQualifiedTypeName name="javax.sql.DataSource"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.green.member.mapper.MemberMapper"/>
-    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="org.springframework.boot.webmvc.autoconfigure.actuate.web.WebMvcEndpointManagementContextConfiguration"/>
-    <fullyQualifiedTypeName name="com.green.member.MemberDTO"/>
     <fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
     <fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.EnableWebMvc"/>
     <fullyQualifiedTypeName name="com.green.board.mapper.BoardMapper"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
-    <fullyQualifiedTypeName name="com.green.board.BoardDTO"/>
-    <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Param"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="jdk.internal.misc.FileSystemOption"/>
     <fullyQualifiedTypeName name="aQute.bnd.annotation.jpms.MainClass"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
@@ -60,4 +51,13 @@
     <fullyQualifiedTypeName name="com.myboard.board.BoardDAO"/>
     <fullyQualifiedTypeName name="com.myboard.board.BoardDTO"/>
     <fullyQualifiedTypeName name="com.myboard.board.mapper.BoardMapper"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Param"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
+    <fullyQualifiedTypeName name="jakarta.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+    <fullyQualifiedTypeName name="com.green.member.MemberDTO"/>
+    <fullyQualifiedTypeName name="com.green.board.PageHandler"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.green.board.BoardDTO"/>
 </qualifiedTypeNameHistroy>
