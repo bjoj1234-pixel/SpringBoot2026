@@ -14,7 +14,15 @@
 		<div id="section_wrap">
 			<div class="word">HOME</div>
 			<div class="content">
-				<img alt="Main" th:src="@{/img/Main.jpg}">
+			<!-- carProduct 상품정보 출력 -->
+				<div class="carList">
+					<div class="carItem" th:each="car : ${carlist}">
+						<img th:src="@{/img/car/{img}(img=${car.img})}">
+						<div class="carName" th:text="${car.carName}"></div>
+						<div class="carPrice" th:text="${#numbers.formatInteger(car.price,3,'COMMA')} + 원"></div>						
+					</div>
+				</div>
+				<!-- <img alt="Main" th:src="@{/img/Main.jpg}"> -->
 			</div>
 		</div>
 	</section>
