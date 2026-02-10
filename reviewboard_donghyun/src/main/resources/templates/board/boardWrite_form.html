@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>boardWriteForm</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/board.css}">
+<!-- <script type="text/javascript" th:src="@{/js/member.js}"></script> -->
+</head>
+<body>	
+	<section>
+		<div id="section_wrap">
+			<div class="word"><h2>게시글 작성</h2></div>
+			<div class="content">
+				<!-- form 태그를 이용해서 회원가입 양식 작성 -->
+				<form th:action="@{/board/writePro}"
+				name="boardWrite_form" method="POST">
+					<table width="600" border="1">
+						<tbody>
+							<tr height="40">
+								<td width="150" align="center">제목</td>
+								<td width="450" align="center">
+									<input type="text" name="title" class="b_subject" required placeholder="제목 입력">
+								</td>
+							</tr>
+							<tr height="40">
+								<td width="150" align="center">작성자</td>
+								<td width="450" align="center">
+									<input type="text" name="writer" required placeholder="작성자 이름 입력">
+								</td>
+							</tr>
+							<tr height="40">
+								<td width="150" align="center">비밀번호</td>
+								<td width="450" align="center">
+									<input type="password" name="writerPw" required placeholder="비밀 번호 입력">
+									<!--  required는 필수입력하라는 뜻(안하면 자동 예외처리)  -->
+								</td>
+							</tr>
+							<tr height="40">
+								<td width="150" align="center">별점</td>
+								<td width="450" align="center">
+									<select name="star">
+										<option value="5">5점 ★★★★★</option>
+										<option value="4">4점 ★★★★</option>
+										<option value="3">3점 ★★★</option>
+										<option value="2">2점 ★★</option>
+										<option value="1">1점 ★</option>
+									</select>
+								</td>
+							</tr>
+							<tr height="40">
+								<td width="150" align="center">내용</td>
+								<td width="450" align="center">
+									<textarea rows="10" cols="55" name="content" class="b_contents" placeholder="리뷰 내용을 입력하세요."></textarea>
+								</td>
+							</tr>
+							<tr height="40">
+								<td colspan="2" align="center">
+									<input type="submit" value="저장하기">
+									<input type="button" th:onclick="|location.href='@{/board/list}'|" value="취소">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

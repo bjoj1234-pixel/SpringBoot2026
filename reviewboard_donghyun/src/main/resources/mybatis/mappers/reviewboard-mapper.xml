@@ -2,3 +2,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<mapper namespace="reviewboard.mapper.ReviewBoardMapper">
+	<!-- 전체 게시글 출력 -->
+	<!-- <select id="getAllBoard" resultType="ReviewBoardDTO">
+		SELECT * FROM reviewboard ORDER BY num DESC
+	</select> -->
+	
+	<!-- 게시글 작성 후 추가 -->
+	<insert id="insertBoard" parameterType="ReviewBoardDTO">
+		INSERT INTO reviewboard(title,writer,writerPw,star,content)
+		VALUES(#{title},#{writer},#{writerPw},#{star},#{content})
+	</insert>
+	
+	<!-- 게시글 상세보기 -->
+	<select id="getReviewDetail" parameterType="int" resultType="ReviewBoardDTO">
+		SELECT * FROM reviewboard WHERE num=#{num}
+	</select>
+	
+	<!-- 상세보기 클릭시 조회수 증가 -->
+	<update id="upReadCount" parameterType="int">
+		UPDATE reviewboard SET readcount = readcount+1 WHERE num=#{num}
+	</update>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateBoard" parameterType="ReviewBoardDTO">
+		UPDATE reviewboard SET title=#{title}, writer=#{writer}, star=#{star}, content=#{content}
+		WHERE num=#{num} AND writerPw=#{writerPw}
+	</update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deleteBoardPro">
+		DELETE FROM reviewboard WHERE num=#{num} AND writerPw=#{writerPw}
+	</delete>
+	
+	<!-- 전체 게시글 갯수 계산 -->
+	<select id="getAllCount">
+		SELECT COUNT(*) FROM reviewboard
+	</select>
+
+	<!-- 게시글 (보여줄 갯수만큼)출력 -->
+	<select id="getPageList" resultType="ReviewBoardDTO" >
+		SELECT * FROM reviewboard ORDER BY num DESC LIMIT #{startRow}, #{rowNum}
+	</select>
+
+	<!-- 모든 게시글의 별점 총합계산 -->
+	<select id="getAllStar"> 
+		SELECT SUM(star) FROM reviewboard
+	</select>
+
+</mapper>

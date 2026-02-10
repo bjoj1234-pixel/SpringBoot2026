@@ -8,9 +8,9 @@
 <!-- 별칭을 작성하는 명령어 태그 : typeAliases -->
 <!-- member-mapper.xml에 들어가는 parameterType, resultType을
 com.green.member.MemberDTO에서 => MemberDTO로 간략하게 변경해줌  -->
-<typeAliases>
-	<!-- <typeAlias alias="MemberDTO" type="com.green.member.MemberDTO"/> -->
-	<typeAlias alias="BoardDTO" type="com.myboard.board.BoardDTO"/>
-</typeAliases>
+	<typeAliases>
+		<!-- <typeAlias alias="MemberDTO" type="com.green.member.MemberDTO"/> -->
+		<typeAlias alias="BoardDTO" type="com.myboard.board.BoardDTO"/>
+	</typeAliases>
 
 </configuration>

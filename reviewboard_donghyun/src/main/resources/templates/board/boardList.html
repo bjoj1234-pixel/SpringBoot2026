@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>board</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/board.css}">
+<script type="text/javascript" th:src="@{/js/calcstar.js}" defer></script>
+</head>
+<body>	
+	<section>
+		<div id="section_wrap">
+			<div class="word"><h2>레스토랑 리뷰</h2></div>
+			<div class="word">
+				<h4>전체 평균 별점 : 
+					<span th:text="|${allStarAvg}점|"></span>
+					<!-- 별 -->
+					<span th:each="i : ${#numbers.sequence(1,star)}">
+						 <img th:src="@{/img/star-one.png}">
+					</span>
+					
+					<!-- 빈칸(5에서 뺀 나머지가 있을시) -->
+					<th:block th:if="${5-star > 0}">			
+						<span th:each="i : ${#numbers.sequence(1,5-star)}">
+							 <img th:src="@{/img/star-zero.png}">
+						</span>					
+					</th:block>
+				</h4>
+			</div>
+			<div class="content">
+					<table width="500" border="1">
+						<tbody>
+							<tr height="50">
+								<td width="150" align="center">
+									<a th:href="@{/board/write}" class="write-btn">글쓰기</a>
+									<!-- 로그인이 된 상태에서만 게시글을 쓰도록 정의할 예정 -->
+									<!-- <a href="#" class="write-btn" id="writeBtn"
+										th:data-login="${session.loginmember != null}"
+									>글쓰기</a> -->
+								</td>
+							</tr>
+							<tr height="50">
+								<td width="50" align="center">번호</td>
+								<td width="320" align="center">제목</td>
+								<td width="100" align="center">작성자</td>
+								<td width="80" align="center">별점</td>
+								<td width="150" align="center">작성일자</td>
+								<td width="80" align="center">조회수</td>
+							</tr>
+							<tr th:each="li,stat:${list}">
+								<td th:text="${pghandler.totalBoard-((pghandler.currentPage-1)*pghandler.rowNum)-stat.index}"></td>
+								<td>
+									<a th:href="@{/board/detail(num=${li.num})}" th:text="${li.title}"></a>
+								</td>
+								<td th:text="${li.writer}"></td>								
+								<td th:text="|${li.star}점|"></td>
+								<td th:text="${li.reg_date}"></td>								
+								<td th:text="${li.readcount}"></td>								
+							</tr>
+						</tbody>
+					</table>
+					<!-- 페이징 화면 시작 -->
+	 				<div class="paging">
+						<!-- 이전 -->	
+						<a th:if="${pghandler.prev}" th:href="@{/board/list(startPage=${pghandler.startPage-1})}">◀</a>
+	
+						<span th:each="i : ${#numbers.sequence(pghandler.startPage,pghandler.endPage)}">
+							<!-- 게시글이 아무것도 없으면 0이 떠서 예외처리 -->
+							<th:block th:if="${i == 0}"></th:block>
+							<!-- 게시글이 아무것도 없으면 0이 떠서 예외처리 -->
+							<th:block th:unless="${i == 0}">
+								<a th:href="@{/board/list(startPage=${i})}"
+									th:text = "${i}"
+									th:classappend="${i == pghandler.currentPage ? 'active':''}" 
+								></a>
+							</th:block>
+						</span>						
+						<!-- 다음 -->	
+						<a th:if="${pghandler.next}" th:href="@{/board/list(startPage=${pghandler.endPage+1})}">▶</a>
+					</div>			
+					<!-- 페이징 화면 종료 -->					
+			</div>
+		</div>
+	</section>
+</body>
+</html>

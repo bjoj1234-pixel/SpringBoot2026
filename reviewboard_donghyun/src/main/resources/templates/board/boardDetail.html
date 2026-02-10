@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>boardDetail</title>
+<link rel="stylesheet" th:href="@{/css/common.css}">
+<link rel="stylesheet" th:href="@{/css/home.css}">
+<link rel="stylesheet" th:href="@{/css/board.css}">
+<!-- <script type="text/javascript" th:src="@{/js/member.js}"></script> -->
+</head>
+<body>	
+	<section>
+		<div id="section_wrap">
+			<div class="word"><h2>리뷰 상세보기</h2></div>
+			<div class="content">
+				
+					<table width="500" border="1">
+						<tbody>
+							<tr height="40">
+								<td width="120" align="center">제목</td>
+								<td width="180" align="center" th:text="${reviewdetail.title}"></td>
+							</tr>
+							<tr height="40">
+								<td width="120" align="center">작성자</td>
+								<td width="180" align="center" th:text="${reviewdetail.writer}"></td>
+							</tr>
+							<tr height="40">
+								<td width="120" align="center">작성일</td>
+								<td width="180" align="center" th:text="${reviewdetail.reg_date}"></td>
+							</tr>
+							<tr height="40">
+								<td width="120" align="center">조회수</td>
+								<td width="180" align="center" th:text="${reviewdetail.readcount}"></td>
+							</tr>	
+							<tr height="40">
+								<td width="120" align="center">별점</td>
+								<td width="180" align="center">
+									<!-- 별 -->
+									<span th:each="i : ${#numbers.sequence(1,reviewdetail.star)}">
+										 <img th:src="@{/img/star-one.png}">
+									</span>
+									
+									<!-- 빈칸(5에서 뺀 나머지가 있을시) -->
+									<th:block th:if="${5-reviewdetail.star > 0}">			
+										<span th:each="i : ${#numbers.sequence(1,5-reviewdetail.star)}">
+											 <img th:src="@{/img/star-zero.png}">
+										</span>					
+									</th:block>								
+								</td>
+							</tr>	
+							<tr height="140">
+								<td width="120" align="center">내용</td>
+								<td align="center" colspan="3" th:text="${reviewdetail.content}"></td>
+							</tr>					
+							<tr height="40">
+								<td align="center" colspan="4">
+									<input type="button" value="수정하기" th:onclick="|location.href='@{/board/update(num=${reviewdetail.num})}'|">									
+									<input type="button" value="삭제하기" th:onclick="|location.href='@{/board/delete(num=${reviewdetail.num})}'|">
+									<input type="button" value="목록보기" th:onclick="|location.href='@{/board/list}'|">
+								</td>
+							</tr>					
+						</tbody>
+					</table>
+
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
