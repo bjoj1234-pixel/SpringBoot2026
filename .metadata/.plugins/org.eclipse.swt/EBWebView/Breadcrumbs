@@ -1,46 +1,37 @@
-0:58:02 Tab5 StartNav313 #typed
-0:58:02 Tab5 FinishNav313
-0:58:02 Tab5 PageLoad
-0:58:02 Tab5 StartNav314 #typed
-0:58:02 Tab5 FinishNav314
-0:58:02 Tab5 PageLoad
-0:58:07 Tab27 StartNav315 #typed
-0:58:07 Tab27 FinishNav315
-0:58:07 Tab27 PageLoad
-0:58:09 Tab27 StartNav316 #typed
-0:58:09 Tab27 FinishNav316
-0:58:09 Tab27 PageLoad
-0:58:12 Tab27 StartNav317 #typed
-0:58:12 Tab27 FinishNav317
-0:58:12 Tab27 PageLoad
-0:58:12 Tab27 StartNav318 #typed
-0:58:12 Tab27 FinishNav318
-0:58:12 Tab27 PageLoad
-0:58:15 Tab27 StartNav319 #typed
-0:58:15 Tab27 FinishNav319
-0:58:15 Tab27 PageLoad
-0:58:15 Tab27 StartNav320 #typed
-0:58:15 Tab27 FinishNav320
-0:58:15 Tab27 PageLoad
-0:58:15 Tab27 StartNav321 #typed
-0:58:15 Tab27 FinishNav321
-0:58:15 Tab27 PageLoad
-0:58:15 Tab27 StartNav322 #typed
-0:58:15 Tab27 FinishNav322
-0:58:15 Tab27 PageLoad
-0:58:16 Tab27 StartNav323 #typed
-0:58:16 Tab27 FinishNav323
-0:58:16 Tab27 PageLoad
-0:58:16 Tab27 StartNav324 #typed
-0:58:16 Tab27 FinishNav324
-0:58:16 Tab27 PageLoad
-0:58:18 Tab27 StartNav325 #typed
-0:58:18 Tab27 FinishNav325
-0:58:18 Tab27 PageLoad
-0:58:19 Tab27 StartNav326 #typed
-0:58:19 Tab27 FinishNav326
-0:58:19 Tab27 PageLoad
-0:58:19 Tab27 StartNav327 #typed
-0:58:19 Tab27 FinishNav327
-0:58:19 Tab27 PageLoad
-0:58:37 Microsoft.UnloadController.IsUnclosableApp_IsNotWebApp
+3:06:12 Tab13 StartNav183 #typed
+3:06:12 Tab13 FinishNav183
+3:06:12 Tab13 PageLoad
+3:06:12 Tab13 StartNav184 #typed
+3:06:12 Tab13 FinishNav184
+3:06:12 Tab13 PageLoad
+3:06:27 Tab13 StartNav185 #typed
+3:06:27 Tab13 FinishNav185
+3:06:27 Tab13 PageLoad
+3:06:27 Tab13 StartNav186 #typed
+3:06:27 Tab13 FinishNav186
+3:06:27 Tab13 PageLoad
+3:06:27 Tab13 StartNav187 #typed
+3:06:27 Tab13 FinishNav187
+3:06:27 Tab13 PageLoad
+3:06:29 Tab7 StartNav188 #typed
+3:06:29 Tab7 FinishNav188
+3:06:29 Tab7 PageLoad
+3:06:34 Microsoft.NewBrowser_Popup
+3:06:34 Microsoft.BrowserList.AddBrowser
+3:06:34 Browser16 Insert active Tab16 at 0
+3:06:34 Tab16 StartNav189 #auto_toplevel
+3:06:34 Tab16 StartNav190 #typed
+3:06:34 Tab16 FinishNav189
+3:06:34 Tab16 PageLoad
+3:06:34 Tab16 FinishNav190
+3:06:34 Tab16 PageLoad
+3:06:34 Tab16 StartNav191 #typed
+3:06:34 Tab16 FinishNav191
+3:06:34 Tab16 PageLoad
+3:06:34 Tab7 StartNav192 #typed
+3:06:34 Tab7 FinishNav192
+3:06:34 Tab7 PageLoad
+3:06:35 Tab7 StartNav193 #typed
+3:06:35 Tab7 FinishNav193
+3:06:35 Tab7 PageLoad
+5:15:20 Microsoft.UnloadController.IsUnclosableApp_IsNotWebApp

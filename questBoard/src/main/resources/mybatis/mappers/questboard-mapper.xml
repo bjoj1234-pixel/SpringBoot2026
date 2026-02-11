@@ -7,7 +7,7 @@
 	<insert id="inserQuestBoard" parameterType="qDTO">
 		INSERT INTO questBoard(writer,email,subject,password,ref,re_step,re_level,content)
 		VALUES(#{writer},#{email},#{subject},#{password},
-		(SELECT IFNULL(MAX(r.ref)+1,1) FROM questBoard q),
+		(SELECT IFNULL(MAX(q.ref)+1,1) FROM questBoard q),
 		1,1,#{content})
 	</insert>
 	
@@ -23,16 +23,24 @@
 	
 	
 	<!-- 댓글 작성 추가 -->
-	<select id="rePlyInsert" parameterType="qDTO">
-		INSET INTO questBoard(writer,email,subject,password,ref,re_step,re_level,content)
+	<insert id="rePlyInsert" parameterType="qDTO">
+		INSERT INTO questBoard(writer,email,subject,password,ref,re_step,re_level,content)
 		VALUES(#{writer},#{email},#{subject},#{password},#{ref},
 		#{re_step}+1,#{re_level}+1,#{content})
-	</select>
+		
+		<!-- INSERT INTO questBoard(writer,email,subject,password,ref,re_step,re_level,content)
+		VALUES(#{writer},#{email},#{subject},#{password},#{ref},
+		#{re_step}+1,#{re_level}+1,#{content}) -->
+	</insert>
 	
 	<!-- 댓글 작성시 댓글의 순서와 단계를 update -->
-	<select id="reSqUpdate" parameterType="qDTO">
+	<update id="reSqUpdate" parameterType="qDTO">
 		UPDATE questBoard SET re_step = re_step + 1
 		WHERE ref = #{ref} AND re_step > #{re_step}
+	</update>
+	
+	<select id="findrePl" parameterType="qDTO" resultType="int">
+		SELECT MAX(q.re_step) FROM questBoard q WHERE q.ref = #{ref}
 	</select>
 </mapper>
 

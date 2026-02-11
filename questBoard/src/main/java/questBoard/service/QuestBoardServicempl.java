@@ -49,8 +49,18 @@ public class QuestBoardServicempl implements QuestBoardService{
 	@Override
 	public void rePlyProcess(QuestBoardDTO qdto) {
 		System.out.println("QuestBoardServicempl inserQuestBoard() 출력");
-		questboardmapper.reSqUpdate(qdto);
-		questboardmapper.rePlyInsert(qdto);		
+		
+		if(questboardmapper.findrePl(qdto) <=1) {
+			questboardmapper.reSqUpdate(qdto);
+			questboardmapper.rePlyInsert(qdto);		
+		}else {
+			System.out.println("댓글 한개만 가능");
+		}
+	}
+	@Override
+	public int findrePl(QuestBoardDTO qdto) {
+		
+		return questboardmapper.findrePl(qdto);
 	} 
 
 }

@@ -23,4 +23,6 @@ public interface QuestBoardMapper {
 	//댓글 작성시 댓글의 순서와 단계를 update
 	public void reSqUpdate(QuestBoardDTO qdto);
 	
+	public int findrePl(QuestBoardDTO qdto);
+	
 }

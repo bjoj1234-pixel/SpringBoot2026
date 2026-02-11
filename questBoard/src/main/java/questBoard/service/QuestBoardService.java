@@ -17,9 +17,12 @@ public interface QuestBoardService {
 	//댓글 작성 추가
 	public void rePlyInsert(QuestBoardDTO qdto);
 	
-	//댓글 작성시 댓글의 순서와 단계를 update
+	//댓글 작성시 글의 순서와 들여쓰기 단계를 update
 	public void reSqUpdate(QuestBoardDTO qdto);
 	
 	//댓글 추가시 update 먼저 실행하고 추가시켜주는 메소드
 	public void rePlyProcess(QuestBoardDTO qdto);
+	
+	public int findrePl(QuestBoardDTO qdto);
+
 }
