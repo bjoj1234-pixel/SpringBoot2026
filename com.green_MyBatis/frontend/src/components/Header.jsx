@@ -18,27 +18,27 @@ export default function Header(){
             <div style={{textAlign:'center'}}>
             {!user ? (
                <>
-                    <Link to="/member/signup">회원가입</Link>
-                    <Link to="/member/login">로그인</Link>
+                    <Link to="/member/signup" style={{padding:'15px'}} >회원가입</Link>
+                    <Link to="/member/login" style={{padding:'15px'}}>로그인</Link>
                </> 
             ):(
                 <>
                     <span style={{fontWeight:'bold',color:'#333'}}>
-                        {user.id === 'admin9867' ? 
+                        {user === 'admin9867' ? 
                         <>
                             <span>관리자</span>
-                            <Link to="/member/list">[회원목록]</Link>
+                            <Link to="/member/list" style={{padding:'15px'}}>[회원목록]</Link>
                         </>
-                        : <span>{user.id}님 환영</span>                        
+                        : <span style={{padding:'15px'}}>{user}님 환영</span>                        
                         }
                     </span>
                         
                     {/* logout함수 연결부분 */}
-                    <Link to="/" onClick={logout}>로그아웃</Link>
-                    <Link to="/member/memberInfo">MyPage</Link>
+                    <Link to="/" onClick={logout} style={{padding:'15px'}}>로그아웃</Link>
+                    <Link to="/member/myinfo" style={{padding:'15px'}}>개인상세정보</Link>
                 </>
             )}
-            <Link to="/board/list">게시판</Link>
+            <Link to="/board/list" style={{padding:'15px'}}>게시판</Link>
             </div>
         </header>
     )

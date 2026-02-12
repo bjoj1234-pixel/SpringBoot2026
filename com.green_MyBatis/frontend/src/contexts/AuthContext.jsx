@@ -14,7 +14,7 @@ export default function AuthProvider({children}){
     useEffect(()=>{
         //세션 스토리지에서 'user'라는 이름으로 저장된 문자열을 가져온다.
         //세션 스토리지는 웹에서 탭을 종료하면 무조건 삭제된다
-        const saveUser =sessionStorage.getItem('user');
+        const saveUser = sessionStorage.getItem('user');
 
         //저장된 데이터가 있다면 문자열을 다시 자바스크립트 객체로 변환(JSON.parse)하여 상태에 저장한다.
         if(saveUser){
