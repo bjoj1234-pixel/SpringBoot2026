@@ -9,6 +9,9 @@
 	<select id="getAllCarProduct" resultType="carDTO">
 		SELECT * FROM carProduct
 	</select>
-	
-	
+	<!-- insert문  -->
+	<insert id="insertCarProduct" parameterType="carDTO">
+		INSERT INTO carProduct(carName,price,company,img,info)
+		VALUES(#{carName},#{price},#{company},#{img},#{info})	
+	</insert>	
 </mapper>

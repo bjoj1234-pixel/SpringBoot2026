@@ -19,5 +19,10 @@ public class CarProductService {
 	public List<CarProductDTO> getAllCarProduct(){
 		return carProductmapper.getAllCarProduct();
 	};
+	
+	public void insertCarProduct(CarProductDTO dto) {
+		carProductmapper.insertCarProduct(dto);
+	}
+
 
 }

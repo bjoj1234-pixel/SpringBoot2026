@@ -12,6 +12,7 @@ import SignupResult from './page/SignupResult';
 import Login from './page/Login';
 import MyInfo from './page/Myinfo';
 import Modify from './page/Modify';
+import Product from './page/Product';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
               <Route path="/member/login" element={<Login/>}/>
               <Route path="/member/myinfo" element={<MyInfo/>}/>
               <Route path="/member/modify" element={<Modify/>}/>
+              <Route path="/cars/insert" element={<Product/>}/>
             </Routes>
           </main>
           

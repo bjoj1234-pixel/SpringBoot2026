@@ -13,4 +13,6 @@ public interface CarProductMapper {
 	//getAllCarProduct 메소드는  - mapper 연결하여 select 쿼리문 작성
 	public List<CarProductDTO> getAllCarProduct();
 	
+	//insert 문 => List<CarProductDTO> 사용 못함
+	public void insertCarProduct(CarProductDTO dto);
 }
